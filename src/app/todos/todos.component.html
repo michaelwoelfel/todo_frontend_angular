@@ -1,11 +1,12 @@
-
+<h1 style="align-self: center">Todos</h1>
 <div class="center">
-    <h1>Todos</h1>
+
     <div class="todocontainer">
-    <div *ngFor="let todo of todos">
+    <mat-card class="todo" *ngFor="let todo of todos">
 <span>{{todo.title}}</span>
 <span>{{todo.description}}</span>
-    </div>
+<input type="checkbox" [checked]="todo.my_field">
+    </mat-card>
 </div>
    
 </div>

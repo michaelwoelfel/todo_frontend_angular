@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -32,7 +33,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LoginComponent {
 
-  constructor(public authService: AuthService, public httpClient: HttpClient) {
+  constructor(public authService: AuthService, public httpClient: HttpClient, public router: Router) {
 
   }
   username: string = "";
@@ -43,10 +44,11 @@ export class LoginComponent {
     event.preventDefault();
     try  {
     let resp = await this.authService.loginWithPassword(this.username,this.password,this.httpClient)
-    console.log(resp);
+    this.router.navigateByUrl('todos')
 
   } catch(e) {
 console.error(e);
+alert('Falscher Benutzername oder Passwort');
 
   }
   }

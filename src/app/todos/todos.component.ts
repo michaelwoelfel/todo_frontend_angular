@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, NgModule } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { environment } from '../../environments/environment.prod';
@@ -27,14 +27,21 @@ export class TodosComponent {
   todos: any = [];
 
   async ngOnInit() {
+    try {
     this.todos = await this.loadTodos();
     console.log(this.todos);
+  } catch(e) {
+    console.error(e)
+  }
+  
   }
   
 
   loadTodos() {
     const url = environment.baseUrl + 'todos/';
-    return lastValueFrom(this.httpClient.get(url));
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', 'Token ' + localStorage.getItem('token'));
+    return lastValueFrom(this.httpClient.get(url, {headers:headers}));
   }
 
 }
