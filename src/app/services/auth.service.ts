@@ -12,15 +12,15 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
 
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  loginWithPassword(username:string, password:string, httpClient:HttpClient) {
+  loginWithPassword(username:string, password:string,) {
     const url = environment.baseUrl + 'login/';
     const body = {
       "username": username,
       "password": password,
     }
-    return lastValueFrom(httpClient.post(url, body));
+    return lastValueFrom(this.httpClient.post(url, body));
 }
   
 }

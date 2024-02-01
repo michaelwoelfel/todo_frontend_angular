@@ -1,3 +1,4 @@
+
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './../services/auth.service';
 import { Component } from '@angular/core';
@@ -9,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+
 
 
 
@@ -33,7 +35,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  constructor(public authService: AuthService, public httpClient: HttpClient, public router: Router) {
+  constructor(public authService: AuthService, public router: Router,) {
 
   }
   username: string = "";
@@ -43,7 +45,7 @@ export class LoginComponent {
   async onLogin(event: Event) {
     event.preventDefault();
     try  {
-    let resp = await this.authService.loginWithPassword(this.username,this.password,this.httpClient)
+   await this.authService.loginWithPassword(this.username,this.password)
     this.router.navigateByUrl('todos')
 
   } catch(e) {
